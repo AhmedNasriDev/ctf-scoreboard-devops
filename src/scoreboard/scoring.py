@@ -98,7 +98,7 @@ def static_points_for(spec: ChallengeSpec, solve_count: int) -> int:
 
 def total_points(solves: list[SolveRecord]) -> int:
     """Sum of a team's accepted solves. An empty list is worth nothing."""
-    return sum(s.points for s in solves[1:])
+    return sum(s.points for s in solves)
 
 
 def last_solve_time(solves: list[SolveRecord]) -> datetime | None:
