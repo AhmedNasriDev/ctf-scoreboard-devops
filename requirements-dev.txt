@@ -1,0 +1,15 @@
+# Development and pipeline dependencies.
+#
+# Separate from requirements.txt because the container that runs in
+# production must not contain a test runner, a linter or a vulnerability
+# scanner. That separation is what makes the multi-stage build in lab sheet 3 worth
+# doing: the naive image (full python base + everything here) is well over
+# 1 GB; the slim runtime image is roughly a fifth of that.
+
+-r requirements.txt
+
+pytest==9.1.1
+pytest-cov==7.1.0
+httpx==0.28.1
+ruff==0.17.0
+pip-audit==2.10.1

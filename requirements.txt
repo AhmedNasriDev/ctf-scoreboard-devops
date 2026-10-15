@@ -1,0 +1,22 @@
+# Runtime dependencies, pinned.
+#
+# Pinned on purpose. An unpinned manifest gives a dependency scanner nothing
+# to compare against, so `pip-audit` reports a clean run on a dependency tree
+# nobody has actually checked. You will meet that fact in lab sheet 2.
+#
+# Direct dependencies only. Everything these pull in is a transitive
+# dependency, and telling the two apart is a question in lab sheet 2 and the
+# subject of the software bill of materials in lab sheet 6.
+#
+# Seven direct dependencies. No Postgres driver: the lab sheets use SQLite.
+# To use Postgres, add psycopg[binary] here and in pyproject.toml.
+#
+# Refresh with:  pip install -U <name>  then  pip freeze | grep -i <name>
+
+fastapi==0.143.0
+uvicorn==0.54.0
+sqlalchemy==2.1.4
+pyyaml==6.0.3
+prometheus-client==0.26.0
+python-multipart==0.0.32
+requests==2.34.2

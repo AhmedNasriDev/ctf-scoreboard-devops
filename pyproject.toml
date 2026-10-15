@@ -1,0 +1,108 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ctf-scoreboard"
+version = "1.0.0"
+description = "A small CTF scoreboard service, used as the running example for the UEM9 DevOps laboratories."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+# Lower bounds only. The exact, audited versions live in requirements.txt,
+# which is what the pipeline and the container install. Keep the two in step
+# when you add a dependency.
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "sqlalchemy>=2.0.30",
+    "pyyaml>=6.0.1",
+    "prometheus-client>=0.20.0",
+    "python-multipart>=0.0.9",
+    "requests>=2.32.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "httpx>=0.27",
+    "ruff>=0.6",
+    "pip-audit>=2.7",
+]
+
+[project.scripts]
+scoreboard = "scoreboard.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+scoreboard = ["py.typed"]
+
+# ---------------------------------------------------------------------------
+# test configuration
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+# --tb=short keeps tracebacks readable in a CI log, where the terminal is
+# 80 columns wide and pytest truncates its one-line summary to fit. The
+# reason a test failed must survive the trip into the pipeline log.
+addopts = "-ra --strict-markers --tb=short"
+testpaths = ["tests"]
+# No `pythonpath = ["src"]` here, on purpose: the package must be installed
+# (`pip install -e .`, which `make install` does) before the tests can import
+# it. That is the src-layout property lab sheet 2 (Part C) asks you to observe.
+markers = [
+    "slow: takes more than a moment; excluded from the fast pipeline stage",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src/scoreboard"]
+omit = ["src/scoreboard/__main__.py"]
+
+[tool.coverage.report]
+# Deliberately NOT excluding anything beyond the unreachable guards. An
+# exclusion list is the easiest way to make a coverage gate meaningless;
+# chapter 2 discusses why.
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
+
+# ---------------------------------------------------------------------------
+# lint and format
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # import ordering
+    "B",    # bugbear
+    "UP",   # pyupgrade
+    "S",    # bandit: security
+    "C4",   # comprehensions
+]
+ignore = [
+    "S101",  # assert: it is a test suite
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests may hardcode obviously fake values and use the test client freely.
+"tests/*" = ["S105", "S106", "S311"]
+# S311: the deliberately injectable fault uses random; it is not cryptographic.
+# B008: FastAPI expresses dependency injection as a call in a default
+#       argument. It is the framework idiom, not a mutable default.
+"src/scoreboard/app.py" = ["S311", "B008"]
+# S603/S607: the seeding helper shells out to git on purpose, with a fixed
+# argument list it builds itself. It is a development tool and is not
+# shipped in the container.
+"tools/seed.py" = ["S603", "S607"]

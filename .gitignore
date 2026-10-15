@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.pem
+data/*.db
+*.egg-info/
+.pytest_cache/
+*.key
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+.seeded
+gitleaks-report.json
+big-teams.csv

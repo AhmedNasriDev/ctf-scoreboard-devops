@@ -1,0 +1,72 @@
+# The competition.
+#
+# This file is data, not code. It is loaded at startup with yaml.safe_load and
+# reconciled into the database: adding a challenge here and restarting adds it,
+# changing one changes it, and running twice changes nothing.
+#
+# In a cluster this file can be replaced by a ConfigMap mounted at
+# CHALLENGES_FILE: the same image then serves a different competition.
+#
+# Flags are stored as SHA-256 hashes so that this file can live in version
+# control without giving the competition away. The plaintext flags for this
+# demonstration set are in docs/FLAGS.md, which is for you while you develop --
+# a real competition would not ship them.
+#
+#   slug          required, unique, URL-safe
+#   title         required
+#   category      optional, default "misc"   (used as a Prometheus label, so
+#                                             keep the set small and fixed)
+#   points        required, the base value
+#   min_points    optional, default min(50, points) -- the decay floor
+#   decay_solves  optional, default 10 -- solves over which the value falls
+#   flag          plaintext; hashed at load time
+#   flag_sha256   already hashed; use this one in version control
+
+challenges:
+  - slug: warmup-banner
+    title: Read the banner
+    category: misc
+    points: 100
+    min_points: 100        # no decay: everybody should get this one
+    decay_solves: 1
+    flag_sha256: "d43aad687d1a1650ecbd9994e5d75c69e65276984922fb9cd25dd0690d1a2693"
+
+  - slug: rot-thirteen
+    title: Caesar had a favourite number
+    category: crypto
+    points: 200
+    min_points: 80
+    decay_solves: 15
+    flag_sha256: "f5b09f3777c95f6395175a009a9357af4fd4b983df5036b53ca51022c86a5e1c"
+
+  - slug: leaky-headers
+    title: Too much information
+    category: web
+    points: 300
+    min_points: 100
+    decay_solves: 12
+    flag_sha256: "0f8a1f0c689c9e403ae733fc83f3a173d4d5cbeb98b580a4f65f27044b1c7a88"
+
+  - slug: stack-the-deck
+    title: Off by one, off by all
+    category: pwn
+    points: 400
+    min_points: 120
+    decay_solves: 8
+    flag_sha256: "2b0b7c7416ef5d9c8a2c68d01a7ded27e8d62d4ab147e3df68827bfe1d1d1351"
+
+  - slug: carved-out
+    title: What the filesystem forgot
+    category: forensics
+    points: 350
+    min_points: 100
+    decay_solves: 10
+    flag_sha256: "df02e29313cfaa8f4faa1fa96434f0507f9f9ba795447a7cf56969b11de49086"
+
+  - slug: the-long-game
+    title: Patience is a side channel
+    category: crypto
+    points: 500
+    min_points: 150
+    decay_solves: 5
+    flag_sha256: "4e06d527ecaeb2b5703b4815b463ae64e6c664fd5cf0badb3919ad9178b91ff5"
