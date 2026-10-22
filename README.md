@@ -333,3 +333,11 @@ removing the pin. The versions in this repository passed the audit on
 ## Licence
 
 MIT. See `LICENSE`. You may keep this repository and put it in your portfolio.
+## Contributing with Git
+
+1. Update your local main branch.
+2. Create a branch for your changes.
+3. Commit your changes with a descriptive message.
+4. Push your branch to GitHub.
+5. Open a pull request targeting main.
+6. Ask a teammate to review your changes before merging.
