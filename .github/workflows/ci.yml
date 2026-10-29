@@ -13,7 +13,6 @@ jobs:
     - name: install
       run: |
         pip install -r requirements-dev.txt
-        pip install -e .
     - name: lint
       run: ruff check . && ruff format --check .
     - name: tests
