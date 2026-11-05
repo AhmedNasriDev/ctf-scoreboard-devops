@@ -1,0 +1,6 @@
+| Defect     | Gate that failed     | Name in the log                                              | One-line cause                                                                          |
+| ---------- | -------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Test 1     | Tests<br>(Exception) | `test_submitting_for_an_unknown_team_is_not_found`           | Missing handling for an unknown team causes an AttributeError when accessing `team.id`. |
+| Test 2     | Tests<br>(Assertion) | `test_last_solve_time_is_the_most_recent_not_the_last_added` | The function returns the last inserted solve instead of the most recent timestamp.      |
+| Credential | Secret scan          | 2 leaks detected<br>                                         | Gitleaks detected two potential secret exposures in the repository.                     |
+| Dependency | Dependency audit     | `idna`                                                       | Vulnerable version 3.6 contains known security vulnerabilities.                         |
