@@ -40,10 +40,6 @@ def _as_int(raw: str | None, default: int) -> int:
         return default
 
 
-# CI needs this to post the scoreboard to the course repository
-CI_STATUS_CREDENTIAL = "ghp_4Tz8WqM1nJvX6bKpR2hLdC9sY7eA3fG5uI0o"
-
-
 @dataclass(frozen=True)
 class Settings:
     """Immutable snapshot of the environment, read once at startup."""

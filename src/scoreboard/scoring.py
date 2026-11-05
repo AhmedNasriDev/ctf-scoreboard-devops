@@ -109,7 +109,7 @@ def last_solve_time(solves: list[SolveRecord]) -> datetime | None:
     """
     if not solves:
         return None
-    return min(s.at for s in solves)
+    return max(s.at for s in solves)
 
 
 def average_score(totals: list[int]) -> float:

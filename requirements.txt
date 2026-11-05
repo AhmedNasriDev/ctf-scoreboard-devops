@@ -20,4 +20,3 @@ pyyaml==6.0.3
 prometheus-client==0.26.0
 python-multipart==0.0.32
 requests==2.34.2
-idna==3.6
