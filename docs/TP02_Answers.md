@@ -4,9 +4,9 @@
 
 ## Exercise 1:
 
-![[part_a.png]]
+![[TP02_screenshots/part_a.png]]
 
-![[part_a_pipeline.png]]
+![[TP02_screenshots/part_a_pipeline.png]]
 
 
 - **(a).** The `pull_request` event triggers the pipeline before changes are merged into the `main` branch. This allows developers to verify that their proposed changes pass all CI checks and identify problems before integrating them into the main codebase.
@@ -31,15 +31,15 @@ SKIP=gitleaks git commit
 
 ## Exercise 3:
 
-![[part_c3.jpg]]
+![[TP02_screenshots/part_c3.jpg]]
 
-![[part_c4.jpg]]
-
-
-![[part_c2.jpg]]
+![[TP02_screenshots/part_c4.jpg]]
 
 
-![[part_c5.jpg]]
+![[TP02_screenshots/part_c2.jpg]]
+
+
+![[TP02_screenshots/part_c5.jpg]]
 
 
 - **(a).** The error line from the GitHub Actions log is:
@@ -61,13 +61,13 @@ It is executed by the `install` step in the GitHub Actions workflow. The `-e` op
 
 ## Exercise 4:
 
-![[part_d1.png]]
+![[TP02_screenshots/part_d1.png]]
 
-![[part_d_failed.png]]
+![[TP02_screenshots/part_d_failed.png]]
 
-![[part_d2.png]]
+![[TP02_screenshots/part_d2.png]]
 
-![[part_d3.png]]
+![[TP02_screenshots/part_d3.png]]
 
 
 
@@ -79,11 +79,11 @@ It is executed by the `install` step in the GitHub Actions workflow. The `-e` op
 | Dependency | Dependency audit     | `idna`                                                       | Vulnerable version 3.6 contains known security vulnerabilities.                         |
 ## Exercise 5:
 
-![[part_d5.png]]
+![[TP02_screenshots/part_d5.png]]
 
-![[part_d6.png]]
+![[TP02_screenshots/part_d6.png]]
 
-![[part_d_final.png]]
+![[TP02_screenshots/part_d_final.png]]
 - **(a).** The vulnerable package `idna` is a **direct dependency** because it is explicitly listed in the project's `requirements.txt` file, pinned to version `3.6`. It is also required by other packages, such as `requests`, `httpx`, and `trio`.
 
 - **(b).** I first inspected `requirements.txt` and confirmed that `idna==3.6` was explicitly declared as a project dependency. I then used `pipdeptree` to inspect the dependency relationships:
