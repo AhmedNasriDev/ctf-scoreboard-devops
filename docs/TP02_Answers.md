@@ -83,6 +83,7 @@ It is executed by the `install` step in the GitHub Actions workflow. The `-e` op
 
 ![[part_d6.png]]
 
+![[part_d_final.png]]
 - **(a).** The vulnerable package `idna` is a **direct dependency** because it is explicitly listed in the project's `requirements.txt` file, pinned to version `3.6`. It is also required by other packages, such as `requests`, `httpx`, and `trio`.
 
 - **(b).** I first inspected `requirements.txt` and confirmed that `idna==3.6` was explicitly declared as a project dependency. I then used `pipdeptree` to inspect the dependency relationships:
