@@ -128,3 +128,17 @@ The job runs only after `verify` passes (`needs: verify`) and only on a push to 
 - **(b).** `latest` is a mutable tag: it does not say which code is inside the image. With two versions running at the same time, you cannot tell which replica runs which version, and a node that cached an older `latest` keeps running the old code while a new node pulls the new one, so both "versions" can silently be the same or different. A rollback is also impossible, because the previous image no longer has a name that points to it.
 
 ---
+
+## Part E results
+
+**Pipeline run on `main`: `verify` then `image`, both green:**
+
+![Pipeline run on main](TP03_screenshots/tp3_e2.png)
+
+**Package `ghcr.io/ahmednasridev/ctf-scoreboard-devops`, **Public**, tagged with the full commit hash:**
+
+![Public package](TP03_screenshots/tp3_e3.png)
+
+**Pull and run of the published image, `/version` shows the same commit hash:**
+
+![docker run of the published image](TP03_screenshots/tp3_e4.png)
